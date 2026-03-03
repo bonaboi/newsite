@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | laylaxemma</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-panel {
+            max-width: 1000px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+        }
+        
+        .admin-tab {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .admin-tab.active {
+            background: #b8a99a;
+            color: white;
+        }
+        
+        .admin-section {
+            display: none;
+        }
+        
+        .admin-section.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0d6cc;
+            border-radius: 10px;
+            font-family: inherit;
+        }
+        
+        .gallery-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        
+        .gallery-item input {
+            flex: 1;
+        }
+        
+        .gallery-item button {
+            padding: 0.5rem 1rem;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .testimonial-item {
+            background: #f9f3ec;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .save-btn {
+            background: #2d2a24;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        .save-btn:hover {
+            background: #c17b5e;
+        }
+        
+        .admin-logout {
+            text-align: right;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-logout a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .admin-logout a:hover {
+            color: #c17b5e;
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .login-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">laylaxemma<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/vanessa.html">Vanessa</a></li>
+                <li><a href="/sophia.html">Sophia</a></li>
+                <li><a href="/certification.html">Certification</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="loginPanel" class="login-form">
+            <h2 class="login-title">Admin Login</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+            <button onclick="login()" class="save-btn">Login</button>
+            <p style="text-align: center; margin-top: 1rem; color: #999;">Default: admin / admin123</p>
+        </div>
+
+        <div id="adminPanel" class="admin-panel" style="display: none;">
+            <div class="admin-logout">
+                <a href="#" onclick="logout()">← Logout</a>
+            </div>
+            
+            <h2>Website Administration</h2>
+            <p style="color: #666; margin-bottom: 2rem;">Edit all content below. Changes save to /data/site-data.json</p>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchTab('common')">Common</button>
+                <button class="admin-tab" onclick="switchTab('vanessa')">Vanessa</button>
+                <button class="admin-tab" onclick="switchTab('sophia')">Sophia</button>
+                <button class="admin-tab" onclick="switchTab('cert')">Certification</button>
+            </div>
+            
+            <!-- Common Settings -->
+            <div id="common-section" class="admin-section active">
+                <h3>Contact Info</h3>
+                <div class="form-group">
+                    <label>Main Phone</label>
+                    <input type="text" id="mainPhone" value="(555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label>Main Email</label>
+                    <input type="email" id="mainEmail" value="info@laylaxemma.com">
+                </div>
+                <div class="form-group">
+                    <label>Footer Contact</label>
+                    <textarea id="footerContact" rows="2">📞 (555) 123-4567
+📧 info@laylaxemma.com</textarea>
+                </div>
+            </div>
+            
+            <!-- Vanessa Section -->
+            <div id="vanessa-section" class="admin-section">
+                <h3>Vanessa's Information</h3>
+                
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="vanName" value="Vanessa">
+                </div>
+                
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="vanBio" rows="4">With over 8 years of experience in therapeutic and sensual massage, Vanessa creates a safe, relaxing environment where you can truly unwind. Her approach combines technical expertise with genuine care, ensuring each session is tailored to your needs.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="vanPhone" value="(555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="vanEmail" value="vanessa@laylaxemma.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="vanLocation" value="Downtown Studio">
+                </div>
+                
+                <div class="form-group">
+                    <label>Profile Image URL</label>
+                    <input type="url" id="vanImage" value="https://images.pexels.com/photos/3997997/pexels-photo-3997997.jpeg?auto=compress&cs=tinysrgb&w=600">
+                </div>
+                
+                <div class="form-group">
+                    <label>Hero Background URL</label>
+                    <input type="url" id="vanHero" value="https://images.pexels.com/photos/3997997/pexels-photo-3997997.jpeg?auto=compress&cs=tinysrgb&w=1920">
+                </div>
+                
+                <h4>Specialties (one per line)</h4>
+                <div class="form-group">
+                    <textarea id="vanSpecialties" rows="4">Nuru Massage
+Deep Tissue
+Thai Massage
+Prostate
+Hot Stone</textarea>
+                </div>
+                
+                <h4>Gallery Images (URLs)</h4>
+                <div id="vanGalleryItems">
+                    <!-- Will be populated by JS -->
+                </div>
+                <button onclick="addGalleryItem('van')" class="btn btn-outline" style="margin-bottom: 2rem;">+ Add Image</button>
+                
+                <h4>Testimonials</h4>
+                <div id="vanTestimonials">
+                    <!-- Will be populated by JS -->
+                </div>
+                <button onclick="addTestimonial('van')" class="btn btn-outline">+ Add Testimonial</button>
+            </div>
+            
+            <!-- Sophia Section -->
+            <div id="sophia-section" class="admin-section">
+                <h3>Sophia's Information</h3>
+                
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="sophName" value="Sophia">
+                </div>
+                
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="sophBio" rows="4">Sophia brings a unique blend of Eastern and Western massage techniques. Trained in Thailand and certified in advanced therapeutic methods, she focuses on creating a deeply relaxing experience that addresses both physical tension and mental stress.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" id="sophPhone" value="(555) 987-6543">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="sophEmail" value="sophia@laylaxemma.com">
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="sophLocation" value="Uptown Wellness Suite">
+                </div>
+                
+                <div class="form-group">
+                    <label>Profile Image URL</label>
+                    <input type="url" id="sophImage" value="https://images.pexels.com/photos/3778688/pexels-photo-3778688.jpeg?auto=compress&cs=tinysrgb&w=600">
+                </div>
+                
+                <div class="form-group">
+                    <label>Hero Background URL</label>
+                    <input type="url" id="sophHero" value="https://images.pexels.com/photos/3778688/pexels-photo-3778688.jpeg?auto=compress&cs=tinysrgb&w=1920">
+                </div>
+                
+                <h4>Specialties (one per line)</h4>
+                <div class="form-group">
+                    <textarea id="sophSpecialties" rows="4">Shiatsu
+Swedish
+Hot Stone
+Aromatherapy
+Sensual</textarea>
+                </div>
+                
+                <h4>Gallery Images (URLs)</h4>
+                <div id="sophGalleryItems">
+                    <!-- Will be populated by JS -->
+                </div>
+                <button onclick="addGalleryItem('soph')" class="btn btn-outline" style="margin-bottom: 2rem;">+ Add Image</button>
+                
+                <h4>Testimonials</h4>
+                <div id="sophTestimonials">
+                    <!-- Will be populated by JS -->
+                </div>
+                <button onclick="addTestimonial('soph')" class="btn btn-outline">+ Add Testimonial</button>
+            </div>
+            
+            <!-- Certification Section -->
+            <div id="cert-section" class="admin-section">
+                <h3>Certification Page</h3>
+                
+                <div class="form-group">
+                    <label>Main Image URL</label>
+                    <input type="url" id="certImage" value="https://images.pexels.com/photos/7654125/pexels-photo-7654125.jpeg?auto=compress&cs=tinysrgb&w=800">
+                </div>
+                
+                <div class="form-group">
+                    <label>Main Text</label>
+                    <textarea id="certMainText" rows="3">Both Vanessa and Sophia are fully licensed massage therapists with advanced certifications in multiple modalities. We maintain the highest standards of professional education and ethics.</textarea>
+                </div>
+                
+                <h4>Certifications List (one per line)</h4>
+                <div class="form-group">
+                    <textarea id="certList" rows="8">National Massage Board Certification
+Advanced Nuru Technique (50hr)
+Thai Traditional Medicine Certificate
+CPR & First Aid Certified (Red Cross)
+Lipids & Lubricants Safety Certified
+BBMP Background Check Clearance</textarea>
+                </div>
+            </div>
+            
+            <button onclick="saveAll()" class="save-btn">💾 Save All Changes</button>
+            <p style="text-align: center; margin-top: 1rem; color: #666;" id="saveMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        // Simple admin functions
+        let isLoggedIn = false;
+        
+        function login() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            
+            if (user === 'admin' && pass === 'admin123') {
+                isLoggedIn = true;
+                document.getElementById('loginPanel').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadData();
+            } else {
+                alert('Invalid credentials');
+            }
+        }
+        
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('loginPanel').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            
+            document.querySelector(`.admin-tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+            document.getElementById(`${tab}-section`).classList.add('active');
+        }
+        
+        // Gallery management
+        function addGalleryItem(escort) {
+            const container = document.getElementById(`${escort}GalleryItems`);
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'gallery-item';
+            itemDiv.innerHTML = `
+                <input type="url" placeholder="Image URL" value="https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=600">
+                <button onclick="this.parentElement.remove()">✖</button>
+            `;
+            container.appendChild(itemDiv);
+        }
+        
+        function addTestimonial(escort) {
+            const container = document.getElementById(`${escort}Testimonials`);
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'testimonial-item';
+            itemDiv.innerHTML = `
+                <input type="text" placeholder="Name" style="margin-bottom: 0.5rem;" value="Client">
+                <input type="text" placeholder="TER" style="margin-bottom: 0.5rem;" value="TER">
+                <textarea placeholder="Testimonial text" rows="2">Great experience!</textarea>
+                <button onclick="this.parentElement.remove()" style="margin-top: 0.5rem;">Remove</button>
+            `;
+            container.appendChild(itemDiv);
+        }
+        
+        // Initialize with default gallery items
+        window.onload = function() {
+            // Default Vanessa gallery
+            const vanGallery = document.getElementById('vanGalleryItems');
+            for (let i = 0; i < 4; i++) {
+                addGalleryItem('van');
+            }
+            
+            // Default Sophia gallery
+            const sophGallery = document.getElementById('sophGalleryItems');
+            for (let i = 0; i < 4; i++) {
+                addGalleryItem('soph');
+            }
+            
+            // Default testimonials
+            const vanTest = document.getElementById('vanTestimonials');
+            const vanTestimonials = [
+                {name: 'Donald', text: 'Had a great time overall! The full-service deep tissue combo was incredible.'},
+                {name: 'Walter', text: 'Although the verification process was new to me, the full-service Thai made it completely worthwhile.'},
+                {name: 'John', text: 'This was my first time exploring, and it turned out to be a fantastic experience.'}
+            ];
+            vanTestimonials.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'testimonial-item';
+                div.innerHTML = `
+                    <input type="text" placeholder="Name" style="margin-bottom: 0.5rem;" value="${t.name}">
+                    <input type="text" placeholder="TER" style="margin-bottom: 0.5rem;" value="TER">
+                    <textarea placeholder="Testimonial text" rows="2">${t.text}</textarea>
+                    <button onclick="this.parentElement.remove()" style="margin-top: 0.5rem;">Remove</button>
+                `;
+                vanTest.appendChild(div);
+            });
+            
+            const sophTest = document.getElementById('sophTestimonials');
+            const sophTestimonials = [
+                {name: 'Michael', text: "Sophia's attention to detail is unmatched. The atmosphere she creates is pure relaxation."},
+                {name: 'James', text: "Best Nuru experience I've ever had. She made me feel completely at ease."},
+                {name: 'Robert', text: 'I was a bit nervous but Sophia is a true professional.'}
+            ];
+            sophTestimonials.forEach(t => {
+                const div = document.createElement('div');
+                div.className = 'testimonial-item';
+                div.innerHTML = `
+                    <input type="text" placeholder="Name" style="margin-bottom: 0.5rem;" value="${t.name}">
+                    <input type="text" placeholder="TER" style="margin-bottom: 0.5rem;" value="TER">
+                    <textarea placeholder="Testimonial text" rows="2">${t.text}</textarea>
+                    <button onclick="this.parentElement.remove()" style="margin-top: 0.5rem;">Remove</button>
+                `;
+                sophTest.appendChild(div);
+            });
+        };
+        
+        function saveAll() {
+            // Collect all data
+            const data = {
+                common: {
+                    mainPhone: document.getElementById('mainPhone').value,
+                    mainEmail: document.getElementById('mainEmail').value,
+                    footerContact: document.getElementById('footerContact').value
+                },
+                vanessa: {
+                    name: document.getElementById('vanName').value,
+                    bio: document.getElementById('vanBio').value,
+                    phone: document.getElementById('vanPhone').value,
+                    email: document.getElementById('vanEmail').value,
+                    location: document.getElementById('vanLocation').value,
+                    image: document.getElementById('vanImage').value,
+                    hero: document.getElementById('vanHero').value,
+                    specialties: document.getElementById('vanSpecialties').value.split('\n').filter(s => s.trim()),
+                    gallery: Array.from(document.querySelectorAll('#vanGalleryItems input')).map(i => i.value),
+                    testimonials: Array.from(document.querySelectorAll('#vanTestimonials .testimonial-item')).map(item => ({
+                        name: item.querySelector('input[type="text"]').value,
+                        ter: item.querySelectorAll('input[type="text"]')[1]?.value || 'TER',
+                        text: item.querySelector('textarea').value
+                    }))
+                },
+                sophia: {
+                    name: document.getElementById('sophName').value,
+                    bio: document.getElementById('sophBio').value,
+                    phone: document.getElementById('sophPhone').value,
+                    email: document.getElementById('sophEmail').value,
+                    location: document.getElementById('sophLocation').value,
+                    image: document.getElementById('sophImage').value,
+                    hero: document.getElementById('sophHero').value,
+                    specialties: document.getElementById('sophSpecialties').value.split('\n').filter(s => s.trim()),
+                    gallery: Array.from(document.querySelectorAll('#sophGalleryItems input')).map(i => i.value),
+                    testimonials: Array.from(document.querySelectorAll('#sophTestimonials .testimonial-item')).map(item => ({
+                        name: item.querySelector('input[type="text"]').value,
+                        ter: item.querySelectorAll('input[type="text"]')[1]?.value || 'TER',
+                        text: item.querySelector('textarea').value
+                    }))
+                },
+                certification: {
+                    image: document.getElementById('certImage').value,
+                    mainText: document.getElementById('certMainText').value,
+                    list: document.getElementById('certList').value.split('\n').filter(l => l.trim())
+                }
+            };
+            
+            // Save to localStorage and show message
+            localStorage.setItem('laylaxemmaData', JSON.stringify(data));
+            
+            const msg = document.getElementById('saveMessage');
+            msg.textContent = '✅ Changes saved to browser! In production, these would save to /data/site-data.json';
+            msg.style.color = 'green';
+            
+            setTimeout(() => {
+                msg.textContent = '';
+            }, 3000);
+            
+            // Update all pages with new data (in a real implementation, this would save to file)
+            console.log('Saved data:', data);
+        }
+        
+        function loadData() {
+            const saved = localStorage.getItem('laylaxemmaData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                // Populate form with saved data
+                // This would load all fields from the saved data
+                alert('Loaded saved data from browser storage');
+            }
+        }
+    </script>
+</body>
+</html>

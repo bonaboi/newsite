@@ -1,0 +1,85 @@
+{
+  "common": {
+    "mainPhone": "(555) 123-4567",
+    "mainEmail": "info@laylaxemma.com",
+    "footerContact": "📞 (555) 123-4567\n📧 info@laylaxemma.com"
+  },
+  "vanessa": {
+    "name": "Vanessa",
+    "bio": "With over 8 years of experience in therapeutic and sensual massage, Vanessa creates a safe, relaxing environment where you can truly unwind. Her approach combines technical expertise with genuine care, ensuring each session is tailored to your needs.",
+    "phone": "(555) 123-4567",
+    "email": "vanessa@laylaxemma.com",
+    "location": "Downtown Studio",
+    "image": "https://images.pexels.com/photos/3997997/pexels-photo-3997997.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "hero": "https://images.pexels.com/photos/3997997/pexels-photo-3997997.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    "specialties": ["Nuru Massage", "Deep Tissue", "Thai Massage", "Prostate", "Hot Stone"],
+    "gallery": [
+      "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3998000/pexels-photo-3998000.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3997992/pexels-photo-3997992.jpeg?auto=compress&cs=tinysrgb&w=600"
+    ],
+    "testimonials": [
+      {
+        "name": "Donald",
+        "ter": "TER",
+        "text": "Had a great time overall! The full-service deep tissue combo was incredible."
+      },
+      {
+        "name": "Walter",
+        "ter": "TER",
+        "text": "Although the verification process was new to me, the full-service Thai made it completely worthwhile."
+      },
+      {
+        "name": "John",
+        "ter": "TER",
+        "text": "This was my first time exploring, and it turned out to be a fantastic experience."
+      }
+    ]
+  },
+  "sophia": {
+    "name": "Sophia",
+    "bio": "Sophia brings a unique blend of Eastern and Western massage techniques. Trained in Thailand and certified in advanced therapeutic methods, she focuses on creating a deeply relaxing experience that addresses both physical tension and mental stress.",
+    "phone": "(555) 987-6543",
+    "email": "sophia@laylaxemma.com",
+    "location": "Uptown Wellness Suite",
+    "image": "https://images.pexels.com/photos/3778688/pexels-photo-3778688.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "hero": "https://images.pexels.com/photos/3778688/pexels-photo-3778688.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    "specialties": ["Shiatsu", "Swedish", "Hot Stone", "Aromatherapy", "Sensual"],
+    "gallery": [
+      "https://images.pexels.com/photos/3822861/pexels-photo-3822861.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3822855/pexels-photo-3822855.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3822852/pexels-photo-3822852.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "https://images.pexels.com/photos/3822830/pexels-photo-3822830.jpeg?auto=compress&cs=tinysrgb&w=600"
+    ],
+    "testimonials": [
+      {
+        "name": "Michael",
+        "ter": "TER",
+        "text": "Sophia's attention to detail is unmatched. The atmosphere she creates is pure relaxation."
+      },
+      {
+        "name": "James",
+        "ter": "TER",
+        "text": "Best Nuru experience I've ever had. She made me feel completely at ease."
+      },
+      {
+        "name": "Robert",
+        "ter": "TER",
+        "text": "I was a bit nervous but Sophia is a true professional."
+      }
+    ]
+  },
+  "certification": {
+    "image": "https://images.pexels.com/photos/7654125/pexels-photo-7654125.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "mainText": "Both Vanessa and Sophia are fully licensed massage therapists with advanced certifications in multiple modalities. We maintain the highest standards of professional education and ethics.",
+    "list": [
+      "National Massage Board Certification",
+      "Advanced Nuru Technique (50hr)",
+      "Thai Traditional Medicine Certificate",
+      "CPR & First Aid Certified (Red Cross)",
+      "Lipids & Lubricants Safety Certified",
+      "BBMP Background Check Clearance"
+    ]
+  }
+}
